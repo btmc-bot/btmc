@@ -10,6 +10,10 @@ let alwaysCheck = [
 module.exports = () => {
     let todo = [];
 
+    for (const a of alwaysCheck) {
+        todo.push(a);
+    }
+
     const options = {
         hostname: 'api.github.com',
         path: '/repos/btmc-bot/btmc/contents/src',
