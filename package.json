@@ -1,0 +1,20 @@
+{
+  "name": "btmc-bot",
+  "version": "1.0.0",
+  "description": "Discord bot (btmc), can be found @ https://btmc.dev/",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon ."
+  },
+  "author": "BTMC Development Studio",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "discord.js": "^13.6.0",
+    "fs": "^0.0.1-security",
+    "get-github-code": "^1.0.4",
+    "quick.db": "^7.1.3"
+  }
+}
