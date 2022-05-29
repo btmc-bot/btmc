@@ -1,3 +1,3 @@
-module.exports = function (client, message) {
+module.exports = function (client, interaction) {
   //
 }
