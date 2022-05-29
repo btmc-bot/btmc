@@ -33,3 +33,4 @@ for (const file of eventFiles) {
 }
 
 client.login(require('./config/token'));
+// THIS IS A TEST COMMENT
