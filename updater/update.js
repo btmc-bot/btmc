@@ -56,6 +56,11 @@ module.exports = () => {
                 _res = await makeReq(options);
                 res = JSON.parse(_res);
 
+                const path = './' + file.path;
+                if (!fs.existsSync(path)) {
+                    fs.mkdirSync(path, { recursive: true });
+                }
+
                 for (const subFile of res) {
                     todo.push(subFile);
                 }
