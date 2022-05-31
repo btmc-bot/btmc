@@ -4,9 +4,10 @@ module.exports = {
     name: "help", // COMMAND NAME
     description: "Displays all commands", // COMMAND DESCRIPTION
     help_menu: {
-        display: true,
-        devlock: false,
-        category: "info"
+        display: true, // SHOWS IN HELP COMMAND (ANY MENU)
+        devlock: false, // ONLY SHOWS FOR DEVS (?)
+        admincat: "mod", // ADMINISTRATOR CATEGORY (PART OF DEVLOCK)
+        category: "info" // THE CATEGORY
     },
     data: { // SLASH COMMAND DATA
         name: 'help',
