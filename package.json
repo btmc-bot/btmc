@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@discordjs/builders": "^0.13.0",
+    "@discordjs/rest": "^0.4.1",
     "discord.js": "^13.6.0",
     "fs": "^0.0.1-security",
     "get-github-code": "^1.0.4",
