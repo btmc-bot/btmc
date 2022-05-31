@@ -12,6 +12,7 @@
     "nodemon": "^2.0.15"
   },
   "dependencies": {
+    "@discordjs/builders": "^0.13.0",
     "discord.js": "^13.6.0",
     "fs": "^0.0.1-security",
     "get-github-code": "^1.0.4",
