@@ -17,6 +17,7 @@
     "fs": "^0.0.1-security",
     "get-github-code": "^1.0.4",
     "https": "^1.0.0",
+    "minimist": "^1.2.6",
     "quick.db": "^7.1.3"
   }
 }
