@@ -1,3 +1,5 @@
 /node_modules
 /docs/.obsidian
 src/**/token.js
+docs/github_data/**
+docs/github_data/
