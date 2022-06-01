@@ -10,10 +10,10 @@ module.exports = {
         admincat: "mod", // ADMINISTRATOR CATEGORY (PART OF DEVLOCK)
         category: "info" // THE CATEGORY
     },
-    data: { // SLASH COMMAND DATA
-        name: 'help',
-        description: 'Displays all commands',
-    },
+    data: new SlashCommandBuilder()
+        .setName('help')
+        .setDescription('Displays information about BTMC')
+    ,
     execute_m(client, message, args) { }, // THE EXECUTION THROUGH MESSAGE
     execute_s(client, interaction) { } // THE EXECUTION THROUGH SLASH COMMAND
 }
