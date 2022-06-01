@@ -12,7 +12,7 @@ function commandInteraction(client, interaction) {
 }
 
 function selectMenuInteraction(client, interaction) {
-  const commandName = interaction.split('_')[0];
+  const commandName = interaction.customId.split('_')[0];
   const command = client.commands.get(commandName);
 
   if (!command) return selectMenuInteractionNoCommandDefined(client, interaction);
