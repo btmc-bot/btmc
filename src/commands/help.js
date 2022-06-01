@@ -1,4 +1,4 @@
-const { MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
+const { MessageEmbed, MessageActionRow, MessageButton, MessageSelectMenu } = require("discord.js");
 const { SlashCommandBuilder } = require('@discordjs/builders');
 
 const catLink = {
@@ -47,60 +47,107 @@ module.exports = {
     ,
     execute_m(client, message, args) { },
     async execute_s(client, interaction) {
-        const category = interaction.options.get('category').value;
+        const category = interaction.options.get('category')?.value;
 
         const row = new MessageActionRow()
             .addComponents(
-                new MessageButton()
-                    .setCustomId('help_showdev')
-                    .setLabel('Show Hidden Commands')
-                    .setStyle('DANGER')
+                new MessageSelectMenu()
+                    .setCustomId('help_catselect')
+                    .setMaxValues(1)
+                    .setMinValues(0)
+                    .setPlaceholder('Home')
+                    .addOptions([
+                        { label: 'Information', value: 'cat_info', description: 'All Information commands' },
+                        { label: 'Moderation', value: 'cat_moderation', description: 'All Moderation commands' },
+                        { label: 'Fun', value: 'cat_fun', description: 'All Fun commands' },
+                        { label: 'Music', value: 'cat_music', description: 'All Music commands' },
+                        { label: 'Other', value: 'cat_other', description: 'All Other commands' },
+                        { label: 'All', value: 'cat_all', description: 'All commands' },
+                        { label: 'Home', value: 'cat_home', description: 'Back to the main help page' },
+                        { label: 'Bot Admin', value: 'cat_admin', description: 'Locked commands for bot admins' }
+                    ])
             )
         //
-
-        if (!category) {
-            const embed = new MessageEmbed()
-                .setTitle('BTMC Help')
-                .setDescription('BTMC is a Multi Purpose discord bot made for any size of server')
-                .addFields(
-                    { name: 'Help Categories', value: 'Our help categories are Info, Moderation, Fun, Music, Other or you can get all commands using "all"', inline: true },
-                    { name: 'Support', value: 'If you need help with BTMC, join our support server [here](https://discord.gg/fPHQeUkrkd)', inline: true },
-                    { name: 'Website', value: 'BTMC\'s main website is [btmc.dev](https://btmc.dev) however we also have a [blog](https://blog.btmc.dev) site', inline: true }
-                )
-                .setColor('#32a89d');
-
-            return await interaction.reply({ embeds: [embed], components: [row], ephemeral: true });
-        }
 
         const hCategory = catLink.sys[category];
         const hText = catLink.text[hCategory];
 
         const commands = client.commands.filter(command => command.help_menu.category === hCategory && command.help_menu.display);
 
-        const embed = new MessageEmbed()
-            .setTitle('BTMC Help (' + hText.toLowerCase() + ')')
-            .setDescription(hText + ' commands')
-            .setColor('#32a89d');
-        //
+        if (!category) {
+            const embed = showPage(client, null);
+
+            return await interaction.reply({ embeds: [embed], components: [row], ephemeral: true });
+        }
 
         if (category === 'cat_all') {
-            const _commands = client.commands.filter(command => command.help_menu.display);
+            const embed = showPage(client, category);
 
-            _commands.forEach(command => {
-                embed.addField(command.name, `${command.description}\nCategory: ${command.help_menu.category}`, true);
-            });
-
-            return await interaction.reply({ embeds: [embed], ephemeral: true });
+            return await interaction.reply({ embeds: [embed], components: [row], ephemeral: true });
         }
 
         if (commands.size === 0) {
             return await interaction.reply({ content: 'There are no commands in this category', ephemeral: true });
         }
 
-        commands.forEach(command => {
-            embed.addField(command.name, command.description, true);
-        })
+        const emebd = showPage(client, category);
 
-        return await interaction.reply({ embeds: [embed], ephemeral: true });
+        return await interaction.reply({ embeds: [embed], components: [row], ephemeral: true });
+    },
+    async nonCommandInteraction(client, interaction) {
+        if (interaction.isSelectMenu()) {
+            const value = interaction.values[0];
+
+            if (!value) {
+                const embed = showPage(client, null);
+
+                return await interaction.message.edit({ embeds: [embed] });
+            }
+
+            if (category == "cat_admin") return await interaction.reply({ content: 'This select menu is not finished. Please wait for the next help.js update. Thank you for your patience.', ephemeral: true });
+
+            const embed = showPage(client, value);
+
+            return await interaction.message.edit({ embeds: [embed] });
+        }
     }
+}
+
+function showPage(client, input) {
+    if (!input) {
+        return embed = new MessageEmbed()
+            .setTitle('BTMC Help')
+            .setDescription('BTMC is a Multi Purpose discord bot made for any size of server')
+            .addFields(
+                { name: 'Help Categories', value: 'Our help categories are Info, Moderation, Fun, Music, Other or you can get all commands using "all"', inline: true },
+                { name: 'Support', value: 'If you need help with BTMC, join our support server [here](https://discord.gg/fPHQeUkrkd)', inline: true },
+                { name: 'Website', value: 'BTMC\'s main website is [btmc.dev](https://btmc.dev) however we also have a [blog](https://blog.btmc.dev) site', inline: true }
+            )
+            .setColor('#32a89d');
+    }
+
+    const hCategory = catLink.sys[category];
+    const hText = catLink.text[hCategory];
+
+    const commands = client.commands.filter(command => command.help_menu.category === hCategory && command.help_menu.display);
+
+    const embed = new MessageEmbed()
+        .setTitle('BTMC Help (' + hText.toLowerCase() + ')')
+        .setDescription(hText + ' commands')
+        .setColor('#32a89d');
+    //
+
+    if (category === 'cat_all') {
+        const _commands = client.commands.filter(command => command.help_menu.display);
+
+        _commands.forEach(command => {
+            embed.addField(command.name, `${command.description}\nCategory: ${command.help_menu.category}`, true);
+        });
+
+        return embed;
+    }
+
+    commands.forEach(command => {
+        embed.addField(command.name, command.description, true);
+    })
 }
