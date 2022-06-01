@@ -4,7 +4,7 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const catLink = {
     sys: {
         "cat_info": "info",
-        "cat_moderation": "moderation",
+        "cat_moderation": "mod",
         "cat_fun": "fun",
         "cat_music": "music",
         "cat_other": "other",
@@ -12,7 +12,7 @@ const catLink = {
     },
     text: {
         "info": "Information",
-        "moderation": "Moderation",
+        "mod": "Moderation",
         "fun": "Fun",
         "music": "Music",
         "other": "Other",
