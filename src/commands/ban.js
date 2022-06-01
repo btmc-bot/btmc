@@ -3,7 +3,7 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 
 module.exports = {
     name: "ban", // COMMAND NAME
-    description: "bans a user", // COMMAND DESCRIPTION
+    description: "Bans a user", // COMMAND DESCRIPTION
     help_menu: {
         display: true, // SHOWS IN HELP COMMAND (ANY MENU)
         devlock: false, // ONLY SHOWS FOR DEVS (?)
