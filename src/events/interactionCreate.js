@@ -1,5 +1,6 @@
 module.exports = function (client, interaction) {
   if (interaction.isCommand()) commandInteraction(client, interaction);
+  if (interaction.isSelectMenu()) selectMenuInteraction(client, interaction);
 }
 
 function commandInteraction(client, interaction) {
@@ -8,4 +9,17 @@ function commandInteraction(client, interaction) {
   if (!command) return;
 
   command.execute_s(client, interaction);
+}
+
+function selectMenuInteraction(client, interaction) {
+  const commandName = interaction.split('_')[0];
+  const command = client.commands.get(commandName);
+
+  if (!command) return selectMenuInteractionNoCommandDefined(client, interaction);
+
+  command.nonCommandInteraction(client, interaction);
+}
+
+function selectMenuInteractionNoCommandDefined(client, interaction) {
+  //
 }
