@@ -77,22 +77,22 @@ module.exports = {
         if (!category) {
             const embed = showPage(client, null);
 
-            return await interaction.reply({ embeds: [embed], components: [row], ephemeral: true });
+            return await interaction.reply({ embeds: [embed], components: [row] });
         }
 
         if (category === 'cat_all') {
             const embed = showPage(client, category);
 
-            return await interaction.reply({ embeds: [embed], components: [row], ephemeral: true });
+            return await interaction.reply({ embeds: [embed], components: [row] });
         }
 
         if (commands.size === 0) {
-            return await interaction.reply({ content: 'There are no commands in this category', ephemeral: true });
+            return await interaction.reply({ content: 'There are no commands in this category' });
         }
 
-        const emebd = showPage(client, category);
+        const embed = showPage(client, category);
 
-        return await interaction.reply({ embeds: [embed], components: [row], ephemeral: true });
+        return await interaction.reply({ embeds: [embed], components: [row] });
     },
     async nonCommandInteraction(client, interaction) {
         if (interaction.isSelectMenu()) {
@@ -101,13 +101,15 @@ module.exports = {
             if (!value) {
                 const embed = showPage(client, null);
 
+                interaction.reply({ content: 'Menu Updated', ephemeral: true });
                 return await interaction.message.edit({ embeds: [embed] });
             }
 
-            if (category == "cat_admin") return await interaction.reply({ content: 'This select menu is not finished. Please wait for the next help.js update. Thank you for your patience.', ephemeral: true });
+            if (value == "cat_admin") return await interaction.reply({ content: 'This select menu is not finished. Please wait for the next help.js update. Thank you for your patience.', ephemeral: true });
 
             const embed = showPage(client, value);
 
+            interaction.reply({ content: 'Menu Updated', ephemeral: true });
             return await interaction.message.edit({ embeds: [embed] });
         }
     }
@@ -126,7 +128,7 @@ function showPage(client, input) {
             .setColor('#32a89d');
     }
 
-    const hCategory = catLink.sys[category];
+    const hCategory = catLink.sys[input];
     const hText = catLink.text[hCategory];
 
     const commands = client.commands.filter(command => command.help_menu.category === hCategory && command.help_menu.display);
@@ -137,7 +139,7 @@ function showPage(client, input) {
         .setColor('#32a89d');
     //
 
-    if (category === 'cat_all') {
+    if (input === 'cat_all') {
         const _commands = client.commands.filter(command => command.help_menu.display);
 
         _commands.forEach(command => {
