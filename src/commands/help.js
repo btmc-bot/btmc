@@ -115,7 +115,7 @@ module.exports = {
 
 function showPage(client, input) {
     if (!input) {
-        return embed = new MessageEmbed()
+        return new MessageEmbed()
             .setTitle('BTMC Help')
             .setDescription('BTMC is a Multi Purpose discord bot made for any size of server')
             .addFields(
@@ -150,4 +150,6 @@ function showPage(client, input) {
     commands.forEach(command => {
         embed.addField(command.name, command.description, true);
     })
+
+    return embed;
 }
