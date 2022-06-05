@@ -5,7 +5,8 @@ BTMC is a GeneralPurpose discord bot
 ## Wanna make BTMC your own?
 Create a directory then copy the updater directory into it. So the tree looks like so:
 
-```btmc_clone/
+```
+btmc_clone/
   updater/
     runOnce.js
     autoRunUpdate.js
