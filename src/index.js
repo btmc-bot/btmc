@@ -7,7 +7,7 @@ const Chalk = require('chalk');
 
 // Constants
 const client = new Client({
-    intents: ["GUILDS"]
+    intents: ["GUILDS", "GUILD_MESSAGES"]
 });
 
 // Variables
