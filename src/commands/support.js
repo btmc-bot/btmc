@@ -15,7 +15,7 @@ module.exports = {
         .setDescription('Need Support For BTMC?')
     ,
     execute_m(client, message, args) { }, // THE EXECUTION THROUGH MESSAGE
-    execute_s(client, interaction) { // THE EXECUTION THROUGH SLASH COMMAND
+    async execute_s(client, interaction) { // THE EXECUTION THROUGH SLASH COMMAND
         const embed = new MessageEmbed()
             .setTitle('Official Support Server')
             .setURL('https://discord.gg/fPHQeUkrkd')
