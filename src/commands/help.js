@@ -107,6 +107,13 @@ module.exports = {
 
             if (value == "cat_admin") return await interaction.reply({ content: 'This select menu is not finished. Please wait for the next help.js update. Thank you for your patience.', ephemeral: true });
 
+            if (value == "cat_home") {
+                const embed = showPage(client, null);
+
+                interaction.reply({ content: 'Menu Updated', ephemeral: true });
+                return await interaction.message.edit({ embeds: [embed] });
+            }
+
             const embed = showPage(client, value);
 
             interaction.reply({ content: 'Menu Updated', ephemeral: true });
