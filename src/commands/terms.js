@@ -1,4 +1,4 @@
-/* const { MessageEmbed } = require("discord.js");
+const { MessageEmbed } = require("discord.js");
 const { SlashCommandBuilder } = require('@discordjs/builders');
 
 module.exports = {
@@ -22,11 +22,9 @@ module.exports = {
             .setColor('#0099ff')
             .setDescription('[Here Are Our Terms:](https://www.btmc.dev/terms/)')
             .addField('[Here Are Our Privacy Rules:](https://www.btmc.dev/privacy/)')
-            .addField(' Please Note: If you are caught breaking these rules')
-            .addField(' Your Guild May Be Banned From Using BTMC')
         //
 
         await interaction.reply({ embeds: [embed] });
     }
 }
-*/ 
+
