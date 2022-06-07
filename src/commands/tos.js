@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+/* const { MessageEmbed } = require("discord.js");
 const { SlashCommandBuilder } = require('@discordjs/builders');
 
 module.exports = {
@@ -29,3 +29,4 @@ module.exports = {
         await interaction.reply({ embeds: [embed] });
     }
 }
+*/ 
