@@ -12,7 +12,7 @@ module.exports = {
     },
     data: new SlashCommandBuilder()
         .setName('TOS')
-        .setDescription('Need Support For BTMC?')
+        .setDescription('Have A Read Of Our TOS')
     ,
     execute_m(client, message, args) { }, // THE EXECUTION THROUGH MESSAGE
     async execute_s(client, interaction) { // THE EXECUTION THROUGH SLASH COMMAND
