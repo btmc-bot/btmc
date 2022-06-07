@@ -1,6 +1,7 @@
 // Dependencies --norm
 const { Client, Collection } = require('discord.js');
 const { readdirSync } = require('fs');
+const data = require('./other');
 
 // Dependencies --ext
 const Chalk = require('chalk');
@@ -31,5 +32,38 @@ for (const file of eventFiles) {
     client.on(eventName, event.bind(null, client));
     console.log(Chalk.green(`Loaded event: ${eventName}`));
 }
+
+// Guild Logs
+client.on("guildCreate", async guild => { 
+  
+    const owner = await client.users.fetch(guild.ownerID)
+    const channel = client.channels.cache.get(' (../other.js").Guild_Logs1} ')
+    const embed = new Discord.MessageEmbed()
+      .setAuthor(`${client.user.username} | New Server`, client.user.avatarURL())
+      .addField(`<:server:886748632165007401> Server`, `Name: \`${guild.name}\`\nID: \`${guild.id}\``)
+      .addField(`<:crown:886748632152432640> Ownership`, `Name: \`${owner.tag}\`\nID: \`${guild.ownerID}\``)
+      .addField(`<:info:886748632165007400> Server Info`, `Members: \`${guild.memberCount}\`\n> Channels: \`${guild.channels.cache.size}\`\n> Created: **${moment(guild.createdTimestamp).format('LL')}** (\`${moment(guild.createdTimestamp).fromNow()}\`)`)
+      .setThumbnail(guild.iconURL({ dynamic:true }))
+      .setColor('GREEN')
+      .setTimestamp()
+      .setFooter(`Total Guilds: ${client.guilds.cache.size}`)
+      channel.send(embed)
+  });
+
+client.on("guildDelete", async guild => { 
+  
+    const owner = await client.users.fetch(guild.ownerID)
+    const channel = client.channels.cache.get(' (../other.js").Guild_Logs1} ')
+    const embed = new Discord.MessageEmbed()
+      .setAuthor(`${client.user.username} | Bot Removed`, client.user.avatarURL())
+      .addField(`<:server:886748632165007401> Server`, `Name: \`${guild.name}\`\nID: \`${guild.id}\``)
+      .addField(`<:crown:886748632152432640> Ownership`, `Name: \`${owner.tag}\`\nID: \`${guild.ownerID}\``)
+      .addField(`<:info:886748632165007400> Server Info`, `Members: \`${guild.memberCount}\`\n> Channels: \`${guild.channels.cache.size}\`\n> Created: **${moment(guild.createdTimestamp).format('LL')}** (\`${moment(guild.createdTimestamp).fromNow()}\`)`)
+      .setThumbnail(guild.iconURL({ dynamic:true }))
+      .setColor('RED')
+      .setTimestamp()
+      .setFooter(`Total Guilds: ${client.guilds.cache.size}`)
+      channel.send(embed)
+  });
 
 client.login(require('./config/token'));
