@@ -1,7 +1,7 @@
 // Dependencies --norm
 const { Client, Collection } = require('discord.js');
 const { readdirSync } = require('fs');
-const data = require('./other');
+const data = require('./config/other');
 
 // Dependencies --ext
 const Chalk = require('chalk');
