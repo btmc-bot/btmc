@@ -21,7 +21,6 @@ module.exports = {
             .setURL('https://discord.gg/fPHQeUkrkd')
             .setColor('#0099ff')
             .setDescription('[Here Are Our Terms:](https://www.btmc.dev/terms/)')
-            .addField('[Here Are Our Privacy Rules:](https://www.btmc.dev/privacy/)')
         //
 
         await interaction.reply({ embeds: [embed] });
